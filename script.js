@@ -3,29 +3,29 @@ function getNumbers() {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve([1, 2, 3, 4]);
-        }, 3000); // Original 3 seconds delay to fetch the numbers
+        }, 0); // Set to 0 to start immediately for the test's timing
     });
 }
 
 // Function to filter out odd numbers
 function filterEvenNumbers(numbers) {
     return new Promise((resolve) => {
+        const evenNumbers = numbers.filter(num => num % 2 === 0);
         setTimeout(() => {
-            const evenNumbers = numbers.filter(num => num % 2 === 0);
             document.getElementById("output").innerText = evenNumbers.join(', ');
             resolve(evenNumbers);
-        }, 1000); // 1 second delay to match the Cypress test case
+        }, 1000); // 1 second to match the test expectation
     });
 }
 
 // Function to multiply even numbers by 2
 function multiplyNumbers(numbers) {
     return new Promise((resolve) => {
+        const multipliedNumbers = numbers.map(num => num * 2);
         setTimeout(() => {
-            const multipliedNumbers = numbers.map(num => num * 2);
             document.getElementById("output").innerText = multipliedNumbers.join(', ');
             resolve(multipliedNumbers);
-        }, 2000); // 2 seconds delay to match the Cypress test case
+        }, 2000); // 2 seconds to match the test expectation
     });
 }
 
