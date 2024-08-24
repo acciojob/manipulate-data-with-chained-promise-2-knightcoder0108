@@ -1,32 +1,44 @@
-function manipulateArray() {
+// Function to return a promise that resolves with an array of numbers after 3 seconds
+function getNumbers() {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve([1, 2, 3, 4]);
-        }, 0); // Immediate resolve to start the chaining
+        }, 3000);
     });
 }
 
-manipulateArray()
-    .then((numbers) => {
-        // First step: Filter out odd numbers
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                const evenNumbers = numbers.filter((num) => num % 2 === 0);
-                document.getElementById('output').textContent = evenNumbers.join(', ');
-                resolve(evenNumbers);
-            }, 1000); // Wait 1 second before resolving with even numbers
+// Function to filter out odd numbers
+function filterEvenNumbers(numbers) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const evenNumbers = numbers.filter(num => num % 2 === 0);
+            resolve(evenNumbers);
+        }, 1000);
+    });
+}
+
+// Function to multiply even numbers by 2
+function multiplyNumbers(numbers) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const multipliedNumbers = numbers.map(num => num * 2);
+            resolve(multipliedNumbers);
+        }, 2000);
+    });
+}
+
+// Chain the promises
+getNumbers()
+    .then(numbers => {
+        // Filter even numbers and update the output
+        return filterEvenNumbers(numbers).then(evenNumbers => {
+            document.getElementById("output").innerText = evenNumbers.join(', ');
+            return evenNumbers;
         });
     })
-    .then((evenNumbers) => {
-        // Second step: Multiply even numbers by 2
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                const multipliedNumbers = evenNumbers.map((num) => num * 2);
-                document.getElementById('output').textContent = multipliedNumbers.join(', ');
-                resolve(multipliedNumbers);
-            }, 2000); // Wait 2 seconds before resolving with multiplied numbers
+    .then(evenNumbers => {
+        // Multiply even numbers by 2 and update the output
+        return multiplyNumbers(evenNumbers).then(multipliedNumbers => {
+            document.getElementById("output").innerText = multipliedNumbers.join(', ');
         });
-    })
-    .catch((error) => {
-        document.getElementById('output').textContent = `Error: ${error.message}`;
     });
