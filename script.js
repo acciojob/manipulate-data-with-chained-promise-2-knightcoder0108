@@ -12,6 +12,7 @@ function filterEvenNumbers(numbers) {
     return new Promise((resolve) => {
         setTimeout(() => {
             const evenNumbers = numbers.filter(num => num % 2 === 0);
+            document.getElementById("output").innerText = evenNumbers.join(', ');
             resolve(evenNumbers);
         }, 1000);
     });
@@ -22,6 +23,7 @@ function multiplyNumbers(numbers) {
     return new Promise((resolve) => {
         setTimeout(() => {
             const multipliedNumbers = numbers.map(num => num * 2);
+            document.getElementById("output").innerText = multipliedNumbers.join(', ');
             resolve(multipliedNumbers);
         }, 2000);
     });
@@ -29,16 +31,8 @@ function multiplyNumbers(numbers) {
 
 // Chain the promises
 getNumbers()
-    .then(numbers => {
-        // Filter even numbers and update the output
-        return filterEvenNumbers(numbers).then(evenNumbers => {
-            document.getElementById("output").innerText = evenNumbers.join(', ');
-            return evenNumbers;
-        });
-    })
-    .then(evenNumbers => {
-        // Multiply even numbers by 2 and update the output
-        return multiplyNumbers(evenNumbers).then(multipliedNumbers => {
-            document.getElementById("output").innerText = multipliedNumbers.join(', ');
-        });
+    .then(numbers => filterEvenNumbers(numbers))
+    .then(evenNumbers => multiplyNumbers(evenNumbers))
+    .catch(error => {
+        console.error("An error occurred:", error);
     });
