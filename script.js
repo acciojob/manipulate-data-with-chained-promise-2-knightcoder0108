@@ -3,15 +3,19 @@ function getNumbers() {
 }
 
 function filterEvenNumbers(numbers) {
-    const evenNumbers = numbers.filter(num => num % 2 === 0);
-    document.getElementById("output").innerText = evenNumbers.join(', ');
-    return Promise.resolve(evenNumbers);
+    return new Promise((resolve) => {
+        const evenNumbers = numbers.filter(num => num % 2 === 0);
+        document.getElementById("output").innerText = evenNumbers.join(', ');
+        resolve(evenNumbers);
+    });
 }
 
 function multiplyNumbers(numbers) {
-    const multipliedNumbers = numbers.map(num => num * 2);
-    document.getElementById("output").innerText = multipliedNumbers.join(', ');
-    return Promise.resolve(multipliedNumbers);
+    return new Promise((resolve) => {
+        const multipliedNumbers = numbers.map(num => num * 2);
+        document.getElementById("output").innerText = multipliedNumbers.join(', ');
+        resolve(multipliedNumbers);
+    });
 }
 
 getNumbers()
