@@ -1,4 +1,3 @@
-
 function getNumbers() {
     return new Promise((resolve) => {
         setTimeout(() => {
@@ -7,17 +6,15 @@ function getNumbers() {
     });
 }
 
-
 function filterEvenNumbers(numbers) {
     return new Promise((resolve) => {
         const evenNumbers = numbers.filter(num => num % 2 === 0);
         setTimeout(() => {
             document.getElementById("output").innerText = evenNumbers.join(', ');
             resolve(evenNumbers);
-        }, 1000); 
+        }, 500); // reduced delay
     });
 }
-
 
 function multiplyNumbers(numbers) {
     return new Promise((resolve) => {
@@ -25,10 +22,9 @@ function multiplyNumbers(numbers) {
         setTimeout(() => {
             document.getElementById("output").innerText = multipliedNumbers.join(', ');
             resolve(multipliedNumbers);
-        }, 2000); 
+        }, 1000); // reduced delay
     });
 }
-
 
 getNumbers()
     .then(numbers => filterEvenNumbers(numbers))
