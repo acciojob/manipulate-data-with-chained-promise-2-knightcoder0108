@@ -3,15 +3,23 @@ function getNumbers() {
 }
 
 function filterEvenNumbers(numbers) {
-    const evenNumbers = numbers.filter(num => num % 2 === 0);
-    document.getElementById("output").innerText = evenNumbers.join(', ');
-    return Promise.resolve(evenNumbers);
+    return new Promise((resolve) => {
+        const evenNumbers = numbers.filter(num => num % 2 === 0);
+        setTimeout(() => {
+            document.getElementById("output").innerText = evenNumbers.join(', ');
+            resolve(evenNumbers);
+        }, 500); // Add a small delay
+    });
 }
 
 function multiplyNumbers(numbers) {
-    const multipliedNumbers = numbers.map(num => num * 2);
-    document.getElementById("output").innerText = multipliedNumbers.join(', ');
-    return Promise.resolve(multipliedNumbers);
+    return new Promise((resolve) => {
+        const multipliedNumbers = numbers.map(num => num * 2);
+        setTimeout(() => {
+            document.getElementById("output").innerText = multipliedNumbers.join(', ');
+            resolve(multipliedNumbers);
+        }, 1500); // Add a small delay
+    });
 }
 
 getNumbers()
